@@ -1,6 +1,7 @@
 package com.br.unifacef.notification.domains.documents;
 
 import com.br.unifacef.notification.domains.documents.enums.NotificationType;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.util.Date;
 
+@Builder
 @Data
 @Document("notification")
 public class Notification {
@@ -18,7 +20,7 @@ public class Notification {
     @Enumerated(EnumType.STRING)
     private NotificationType type;
 
-    private boolean email;
+    private String email;
 
     private String to;
 

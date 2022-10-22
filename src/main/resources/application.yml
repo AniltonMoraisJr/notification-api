@@ -49,8 +49,8 @@ spring:
     default-encoding: UTF-8
     host: smtp.mailtrap.io
     port: 2525
-    username: 7b1884275162fd
-    password: 868bc87a6790ba
+    username: ad196219511361
+    password: 566e6de8c26f75
     properties:
       mail:
         smtp:

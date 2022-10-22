@@ -1,7 +1,10 @@
 package com.br.unifacef.notification.usecases;
 
+import com.br.unifacef.notification.domains.daos.NotificationDAO;
 import com.br.unifacef.notification.domains.daos.SchedulerDAO;
 import com.br.unifacef.notification.domains.daos.UserDAO;
+import com.br.unifacef.notification.domains.documents.Notification;
+import com.br.unifacef.notification.domains.documents.enums.NotificationType;
 import com.br.unifacef.notification.domains.dto.EmailSchedulerDto;
 import com.br.unifacef.notification.domains.entities.Scheduler;
 import com.br.unifacef.notification.domains.entities.User;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Log4j2
 @Component
@@ -23,10 +27,10 @@ public class HandleScheduleMessage {
 
     private final UserDAO userDAO;
 
+    private  final NotificationDAO notificationDAO;
+
     public void handle(Integer schedulerId){
         try {
-
-
             Scheduler scheduler = schedulerDAO.findById(schedulerId).orElse(null);
 
             if (scheduler != null){
@@ -41,13 +45,16 @@ public class HandleScheduleMessage {
                         .endHour(new SimpleDateFormat("HH24:mm").format(scheduler.getFinishedAt()))
                         .build();
 
-                sendScheduleEmail.send(dto);
+                sendScheduleEmail.send(dto, user.getEmail());
+
+                Notification notification = Notification.builder()
+                        .email(user.getEmail())
+                        .success(true)
+                        .type(NotificationType.schedule)
+                        .createAt(new Date(System.currentTimeMillis())).build();
+
+                notificationDAO.save(notification);
             }
-
-
-            // 1. Get Schedule Document from datasource
-            // 2. Transform into DTO
-            // 3. Send e-mail
         } catch (Exception e) {
 
         }

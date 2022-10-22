@@ -12,6 +12,7 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class SendScheduleEmail {
     @Value("${app.mailFrom}")
     private String mailFrom;
 
-    public void send(EmailSchedulerDto emailSchedulerDto){
+    public void send(EmailSchedulerDto emailSchedulerDto, String email){
         try {
             log.info("Sending E-mail...");
 
@@ -35,13 +36,18 @@ public class SendScheduleEmail {
             Context context = new Context();
 
             Map<String, Object> emailBodyParameters = new HashMap<>();
-            emailBodyParameters.put("name", "Teste");
-
+            emailBodyParameters.put("userName", emailSchedulerDto.getUserName());
+            emailBodyParameters.put("startDate", emailSchedulerDto.getStartDate());
+            emailBodyParameters.put("startHour", emailSchedulerDto.getStartHour());
+            emailBodyParameters.put("endDate", emailSchedulerDto.getEndDate());
+            emailBodyParameters.put("endHour", emailSchedulerDto.getEndHour());
+            emailBodyParameters.put("amount", emailSchedulerDto.getAmount());
             context.setVariables(emailBodyParameters);
 
             helper.setFrom(mailFrom);
-            helper.setSubject("Pagamento");
-            String html = templateEngine.process("check-in.html", context);
+            helper.setTo(email);
+            helper.setSubject("Agendamento feito com sucesso!");
+            String html = templateEngine.process("template-email-schedule.html", context);
             helper.setText(html, true);
 
             emailSender.send(message);
