@@ -1,0 +1,61 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: Notification-Api
+  datasource:
+    pg:
+      url: jdbc:postgresql://localhost:5432/bovexo-tst
+      username: bovexo
+      password: H369V3=P
+      driverClassName: org.postgresql.Driver
+    mg:
+      host: localhost
+      port: 27017
+      database: bovexo
+      username: bovexo
+      password: H369V3=P
+    jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      properties:
+        javax:
+          persistence:
+            sharedCache:
+              mode: ALL
+        hibernate:
+          cache:
+            ehcache:
+              missing_cache_strategy: create
+            region:
+              factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+            use_query_cache: true
+            use_second_level_cache: true
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          temp:
+            use_jdbc_metadata_defaults: false
+          jdbc:
+            time_zone: America/Sao_Paulo
+            batch_size: 100
+      hibernate:
+        ddl-auto: validate
+      show-sql: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: America/Sao_Paulo
+  mail:
+    default-encoding: UTF-8
+    host: smtp.mailtrap.io
+    port: 2525
+    username: 7b1884275162fd
+    password: 868bc87a6790ba
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        debug: false
+    protocol: smtp
+    test-connection: false
