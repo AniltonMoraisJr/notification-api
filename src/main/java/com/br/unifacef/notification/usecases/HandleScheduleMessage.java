@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class HandleScheduleMessage {
     private final SendScheduleEmail sendScheduleEmail;
 
-    public void handle(String message){
+    public void handle(Integer message){
         try {
             // 1. Get Schedule Document from datasource
             // 2. Transform into DTO

@@ -3,12 +3,13 @@ package com.br.unifacef.notification.domains.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Immutable;
+import org.hibernate.annotations.Immutable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -25,7 +26,7 @@ public class Scheduler implements Serializable {
     private Integer userId;
 
     @Column(name="amount")
-    private Double amount;
+    private BigDecimal amount;
 
     @Column(name="startedAt")
     private Date startedAt;

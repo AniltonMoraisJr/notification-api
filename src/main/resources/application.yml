@@ -37,6 +37,7 @@ spring:
           time_zone: America/Sao_Paulo
           batch_size: 100
     hibernate:
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
       ddl-auto: validate
     show-sql: true
   jackson:
@@ -60,11 +61,13 @@ spring:
     protocol: smtp
     test-connection: false
   rabbitmq:
-    host: localhost
+    host: 192.168.18.9
     port: 5672
-    username: root
-    password: root
+    username: guest
+    password: guest
     listener:
       simple:
         retry:
           enabled: false
+app:
+  mailFrom: bora_jogar@mail.com

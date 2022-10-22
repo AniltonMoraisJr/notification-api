@@ -31,7 +31,7 @@ public class MgDBConfig extends AbstractMongoClientConfiguration  {
 
 	@Override
 	public MongoClient mongoClient() {
-		return MongoClients.create("mongodb://" + mongoUser + ":" + mongoPass + "@"+ mongoHost + ":" + mongoPort + "/" + mongoDB + "?authSource=admin&authMechanism=SCRAM-SHA-1");
+		return MongoClients.create("mongodb://" + mongoHost + ":" + mongoPort + "/" + mongoDB + "");
 	}
 
 	@Override
