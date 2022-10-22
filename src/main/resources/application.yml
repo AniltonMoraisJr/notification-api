@@ -5,40 +5,40 @@ spring:
     name: Notification-Api
   datasource:
     pg:
-      url: jdbc:postgresql://localhost:5432/bovexo-tst
-      username: bovexo
-      password: H369V3=P
+      url: jdbc:postgresql://192.168.18.9:5431/bora_jogar
+      username: postgres
+      password: example
       driverClassName: org.postgresql.Driver
     mg:
-      host: localhost
+      host: 192.168.18.9
       port: 27017
-      database: bovexo
-      username: bovexo
-      password: H369V3=P
-    jpa:
-      database-platform: org.hibernate.dialect.PostgreSQLDialect
-      properties:
-        javax:
-          persistence:
-            sharedCache:
-              mode: ALL
-        hibernate:
-          cache:
-            ehcache:
-              missing_cache_strategy: create
-            region:
-              factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
-            use_query_cache: true
-            use_second_level_cache: true
-          dialect: org.hibernate.dialect.PostgreSQLDialect
-          temp:
-            use_jdbc_metadata_defaults: false
-          jdbc:
-            time_zone: America/Sao_Paulo
-            batch_size: 100
+      database: bora-jogar
+      username:
+      password:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      javax:
+        persistence:
+          sharedCache:
+            mode: ALL
       hibernate:
-        ddl-auto: validate
-      show-sql: true
+        cache:
+          ehcache:
+            missing_cache_strategy: create
+          region:
+            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+          use_query_cache: true
+          use_second_level_cache: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+        jdbc:
+          time_zone: America/Sao_Paulo
+          batch_size: 100
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     serialization:
@@ -59,3 +59,12 @@ spring:
         debug: false
     protocol: smtp
     test-connection: false
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: root
+    listener:
+      simple:
+        retry:
+          enabled: false

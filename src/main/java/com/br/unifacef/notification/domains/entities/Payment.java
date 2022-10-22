@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Immutable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @Immutable
@@ -24,7 +25,7 @@ public class Payment implements Serializable {
     private Integer scheduleId;
 
     @Column(name = "amount")
-    private Double amount;
+    private BigDecimal amount;
 
     @Column(name = "paymentType")
     private String paymentType;
