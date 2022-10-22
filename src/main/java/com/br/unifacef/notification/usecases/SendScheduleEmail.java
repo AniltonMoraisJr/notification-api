@@ -1,5 +1,6 @@
 package com.br.unifacef.notification.usecases;
 
+import com.br.unifacef.notification.domains.dto.EmailSchedulerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +26,7 @@ public class SendScheduleEmail {
     @Value("${app.mailFrom}")
     private String mailFrom;
 
-    public void send(){
+    public void send(EmailSchedulerDto emailSchedulerDto){
         try {
             log.info("Sending E-mail...");
 

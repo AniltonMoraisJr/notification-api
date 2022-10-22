@@ -15,10 +15,10 @@ public class NotificationEvaluationQueueConsumer {
     private final HandleEvaluationMessage handleEvaluationMessage;
 
     @RabbitListener(queues="notificationEvaluationQueue")
-    public void receiveMessage(Integer scheduleId) throws Exception{
+    public void receiveMessage(String  scheduleId) throws Exception{
         log.debug("Receive message from Queue: notificationEvaluationQueue. Message: {}", scheduleId);
         try {
-            handleEvaluationMessage.handle(scheduleId);
+            handleEvaluationMessage.handle(Integer.valueOf( scheduleId));
         } catch (Exception e) {
             throw e;
         }

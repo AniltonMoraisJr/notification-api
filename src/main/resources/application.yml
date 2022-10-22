@@ -45,14 +45,6 @@ spring:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
     time-zone: America/Sao_Paulo
-  logging:
-    level:
-      com:
-        br:
-          unifacef:
-            notification: DEBUG
-      org:
-        springframework: DEBUG
   mail:
     default-encoding: UTF-8
     host: smtp.mailtrap.io
@@ -77,5 +69,9 @@ spring:
       simple:
         retry:
           enabled: false
+logging:
+  level:
+    com.br.unifacef.notification: DEBUG
+    org.springframework: ERROR
 app:
   mailFrom: bora_jogar@mail.com

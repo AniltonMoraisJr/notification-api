@@ -16,7 +16,7 @@ public class NotificationScheduleQueueConsumer {
     private final HandleScheduleMessage handleScheduleMessage;
 
     @RabbitListener(queues="notificationScheduleQueue")
-    public void receiveMessage(Integer scheduleId) throws Exception{
+    public void receiveMessage(String scheduleId) throws Exception{
         try {
             log.debug("Receive message from Queue: notificationScheduleQueue. Message: {}", scheduleId);
             handleScheduleMessage.handle(Integer.valueOf(scheduleId));

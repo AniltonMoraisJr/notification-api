@@ -14,10 +14,10 @@ public class NotificationPaymentQueueConsumer {
     private final HandlePaymentMessage handlePaymentMessage;
 
     @RabbitListener(queues="notificationPaymentQueue")
-    public void receiveMessage(Integer scheduleId) throws Exception{
+    public void receiveMessage(String scheduleId) throws Exception{
         log.debug("Receive message from Queue: notificationPaymentQueue. Message: {}", scheduleId);
         try {
-            handlePaymentMessage.handle(scheduleId);
+            handlePaymentMessage.handle(Integer.valueOf( scheduleId));
         } catch (Exception e) {
             throw e;
         }
