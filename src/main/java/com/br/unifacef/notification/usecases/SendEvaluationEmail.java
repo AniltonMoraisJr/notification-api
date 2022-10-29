@@ -1,5 +1,7 @@
 package com.br.unifacef.notification.usecases;
 
+import com.br.unifacef.notification.domains.dto.EmailEvaluationDto;
+import com.br.unifacef.notification.domains.dto.EmailSchedulerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +27,7 @@ public class SendEvaluationEmail {
     @Value("${app.mailFrom}")
     private String mailFrom;
 
-    public void send(){
+    public void send(EmailEvaluationDto emailEvaluationDto, String email){
         try {
             log.info("Sending E-mail...");
 
@@ -34,13 +36,18 @@ public class SendEvaluationEmail {
             Context context = new Context();
 
             Map<String, Object> emailBodyParameters = new HashMap<>();
-            emailBodyParameters.put("name", "Teste");
-
+            emailBodyParameters.put("userName", emailEvaluationDto.getUserName());
+            emailBodyParameters.put("startDate", emailEvaluationDto.getStartDate());
+            emailBodyParameters.put("startHour", emailEvaluationDto.getStartHour());
+            emailBodyParameters.put("endDate", emailEvaluationDto.getEndDate());
+            emailBodyParameters.put("endHour", emailEvaluationDto.getEndHour());
+            emailBodyParameters.put("amount", emailEvaluationDto.getAmount());
             context.setVariables(emailBodyParameters);
 
             helper.setFrom(mailFrom);
-            helper.setSubject("Pagamento");
-            String html = templateEngine.process("check-in.html", context);
+            helper.setTo(email);
+            helper.setSubject("Estamos ansiosos pelo seu feedBack!");
+            String html = templateEngine.process("notification-evaluation.html", context);
             helper.setText(html, true);
 
             emailSender.send(message);

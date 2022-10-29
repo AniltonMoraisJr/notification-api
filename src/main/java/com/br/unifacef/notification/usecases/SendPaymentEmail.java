@@ -1,5 +1,7 @@
 package com.br.unifacef.notification.usecases;
 
+import com.br.unifacef.notification.domains.dto.EmailEvaluationDto;
+import com.br.unifacef.notification.domains.dto.EmailPaymentDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +27,7 @@ public class SendPaymentEmail {
     @Value("${app.mailFrom}")
     private String mailFrom;
 
-    public void send(){
+    public void send(EmailPaymentDto emailPaymentDto, String email){
         try {
             log.info("Sending E-mail...");
 
@@ -34,14 +36,16 @@ public class SendPaymentEmail {
             Context context = new Context();
 
             Map<String, Object> emailBodyParameters = new HashMap<>();
-            emailBodyParameters.put("name", "Anilton");
-
-
-
+            emailBodyParameters.put("userName", emailPaymentDto.getUserName());
+            emailBodyParameters.put("paymentType", emailPaymentDto.getPaymentType());
+            emailBodyParameters.put("paymentCode", emailPaymentDto.getPaymentCode());
+            emailBodyParameters.put("receiveDate", emailPaymentDto.getReceiveDate());
+            emailBodyParameters.put("amount", emailPaymentDto.getAmount());
             context.setVariables(emailBodyParameters);
 
             helper.setFrom(mailFrom);
-            helper.setSubject("Pagamento");
+            helper.setTo(email);
+            helper.setSubject("Recebemos seu pagamento!");
             String html = templateEngine.process("notification-payment.html", context);
             helper.setText(html, true);
 

@@ -56,7 +56,7 @@ public class HandleScheduleMessage {
                 notificationDAO.save(notification);
             }
         } catch (Exception e) {
-
+            log.error( e.getMessage());
         }
     }
 }

@@ -15,10 +15,11 @@ public class NotificationPaymentQueueConsumer {
 
     @RabbitListener(queues="notificationPaymentQueue")
     public void receiveMessage(String scheduleId) throws Exception{
-        log.debug("Receive message from Queue: notificationPaymentQueue. Message: {}", scheduleId);
         try {
+            log.debug("Receive message from Queue: notificationPaymentQueue. Message: {}", scheduleId);
             handlePaymentMessage.handle(Integer.valueOf( scheduleId));
         } catch (Exception e) {
+            log.error(e.getMessage());
             throw e;
         }
     }

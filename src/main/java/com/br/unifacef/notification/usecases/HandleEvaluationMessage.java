@@ -5,6 +5,7 @@ import com.br.unifacef.notification.domains.daos.SchedulerDAO;
 import com.br.unifacef.notification.domains.daos.UserDAO;
 import com.br.unifacef.notification.domains.documents.Notification;
 import com.br.unifacef.notification.domains.documents.enums.NotificationType;
+import com.br.unifacef.notification.domains.dto.EmailEvaluationDto;
 import com.br.unifacef.notification.domains.dto.EmailSchedulerDto;
 import com.br.unifacef.notification.domains.entities.Scheduler;
 import com.br.unifacef.notification.domains.entities.User;
@@ -19,7 +20,7 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 public class HandleEvaluationMessage {
-    private final SendScheduleEmail sendScheduleEmail;
+    private final SendEvaluationEmail sendEvaluationEmail;
 
     private final SchedulerDAO schedulerDAO;
 
@@ -34,7 +35,7 @@ public class HandleEvaluationMessage {
             if (scheduler != null){
                 User user = userDAO.findById(scheduler.getUserId()).orElseThrow();
 
-                EmailSchedulerDto dto = EmailSchedulerDto
+                EmailEvaluationDto dto = EmailEvaluationDto
                         .builder()
                         .userName(String.format("%s %s", user.getFirstName(), user.getLastName()))
                         .startDate(new SimpleDateFormat("dd/MM/yyyy").format(scheduler.getStartedAt()))
@@ -43,18 +44,18 @@ public class HandleEvaluationMessage {
                         .endHour(new SimpleDateFormat("HH24:mm").format(scheduler.getFinishedAt()))
                         .build();
 
-                sendScheduleEmail.send(dto, user.getEmail());
+                sendEvaluationEmail.send(dto, user.getEmail());
 
                 Notification notification = Notification.builder()
                         .email(user.getEmail())
                         .success(true)
-                        .type(NotificationType.schedule)
+                        .type(NotificationType.evaluation)
                         .createAt(new Date(System.currentTimeMillis())).build();
 
                 notificationDAO.save(notification);
             }
         } catch (Exception e) {
-
+            log.error(e.getMessage());
         }
     }
 }

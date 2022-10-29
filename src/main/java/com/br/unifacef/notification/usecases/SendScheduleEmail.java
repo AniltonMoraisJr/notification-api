@@ -47,7 +47,7 @@ public class SendScheduleEmail {
             helper.setFrom(mailFrom);
             helper.setTo(email);
             helper.setSubject("Agendamento feito com sucesso!");
-            String html = templateEngine.process("template-email-schedule.html", context);
+            String html = templateEngine.process("notification-schedule.html", context);
             helper.setText(html, true);
 
             emailSender.send(message);

@@ -5,12 +5,15 @@ spring:
     name: Notification-Api
   datasource:
     pg:
-      url: jdbc:postgresql://192.168.18.9:5431/bora_jogar
+#      url: jdbc:postgresql://192.168.18.9:5431/bora_jogar
+      url: jdbc:postgresql://0.0.0.0:5432/bora_jogar
       username: postgres
-      password: example
+#      password: example
+      password: 1234
       driverClassName: org.postgresql.Driver
     mg:
-      host: 192.168.18.9
+#      host: 192.168.18.9
+      host: 0.0.0.0
       port: 27017
       database: bora-jogar
       username:

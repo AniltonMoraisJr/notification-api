@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 @Immutable
@@ -32,4 +33,7 @@ public class Payment implements Serializable {
 
     @Column(name = "paymentCode")
     private String paymentCode;
+
+    @Column(name = "createdAt")
+    private Date createdAt;
 }
