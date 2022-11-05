@@ -41,8 +41,9 @@ public class HandleScheduleMessage {
                         .userName(String.format("%s %s", user.getFirstName(), user.getLastName()))
                         .startDate(new SimpleDateFormat("dd/MM/yyyy").format(scheduler.getStartedAt()))
                         .endDate(new SimpleDateFormat("dd/MM/yyyy").format(scheduler.getFinishedAt()))
-                        .startHour(new SimpleDateFormat("HH24:mm").format(scheduler.getStartedAt()))
-                        .endHour(new SimpleDateFormat("HH24:mm").format(scheduler.getFinishedAt()))
+                        .startHour(new SimpleDateFormat("HH:mm").format(scheduler.getStartedAt()))
+                        .endHour(new SimpleDateFormat("HH:mm").format(scheduler.getFinishedAt()))
+                        .amount(scheduler.getAmount())
                         .build();
 
                 sendScheduleEmail.send(dto, user.getEmail());

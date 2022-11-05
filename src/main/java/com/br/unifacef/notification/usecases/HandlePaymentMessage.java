@@ -31,12 +31,12 @@ public class HandlePaymentMessage {
     private final UserDAO userDAO;
 
     private  final NotificationDAO notificationDAO;
-    public void handle(Integer scheduleId){
+    public void handle(Integer paymentId){
         try {
-            Payment payment = paymentDAO.findById(scheduleId).orElse(null);
+            Payment payment = paymentDAO.findById(paymentId).orElse(null);
 
             if (payment != null){
-                Scheduler scheduler = schedulerDAO.findById(scheduleId).orElse(null);
+                Scheduler scheduler = schedulerDAO.findById(payment.getScheduleId()).orElse(null);
                 User user = userDAO.findById(scheduler.getUserId()).orElseThrow();
 
                 EmailPaymentDto dto = EmailPaymentDto
@@ -44,7 +44,7 @@ public class HandlePaymentMessage {
                         .userName(String.format("%s %s", user.getFirstName(), user.getLastName()))
                         .paymentType(payment.getPaymentType())
                         .paymentCode(payment.getPaymentCode())
-                        .receiveDate(new SimpleDateFormat("dd/MM/yyyy").format(payment.getCreatedAt()))
+                        .receiveDate(new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis())))
                         .amount(payment.getAmount())
                         .build();
 

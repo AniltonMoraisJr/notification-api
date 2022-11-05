@@ -14,7 +14,7 @@ import java.util.Optional;
 public class PaymentDAO {
     private final PaymentRepository paymentRepository;
 
-    public Optional<Payment> findById(Integer scheduleId){
-        return paymentRepository.findByScheduleId(scheduleId);
+    public Optional<Payment> findById(Integer paymentId){
+        return paymentRepository.findById(paymentId);
     }
 }
