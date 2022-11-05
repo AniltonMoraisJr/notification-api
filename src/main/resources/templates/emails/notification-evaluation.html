@@ -1,13 +1,109 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Avaliação</title>
-</head>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://ww.w3.org/
+TR/xhtm11/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern HTML Email Template</title>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+	body {
+		margin: 0;
+		background-color: #cccccc;
+	}
+	table {
+		border-spacing: 0;
+	}
+	td {
+		padding: 0;
+	}
+	img {
+		border: 0;
+	}
+	h2, h4, p {
+		font-family: 'Montserrat', sans-serif;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	img {
+		max-width: 100%;
+	}
+	h2 {
+		text-align: center;
+		color: rgb(204, 153, 51)
+	}
+
+	.title-status {
+		text-align: center;
+	}
+
+	.container-image {
+		display: flex;
+		justify-content: center;
+	}
+
+	.divider {
+		width: 100%;
+		border-bottom: 1px solid rgba(0,0,0,0.4);
+	}
+	.wrapper {
+		width: 100%;
+		table-layout: fixed;
+		background-color: #cccccc;
+		padding-bottom: 60px;
+	}
+	.main {
+		background-color: #ffffff;
+		margin: 0 auto;
+		width: 100%;
+		max-width: 600px;
+		border-spacing: 0;
+		font-family: sans-serif;
+		color: #171a1b;
+	}
+</style>
 <body>
-    <strong th:text="${name}">TESTETSETES</strong>
+<div class="wrapper">
+    <table class="main" width="100%">
+        <tr>
+            <td>
+                <img src='https://files.constantcontact.com/d965bca4901/9aa76313-9c16-410a-a137-48d5c9a368ab.jpg' width="600"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Nos conte como foi sua experiencia</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    Olá <b th:text="${userName}">Neymar</b>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4 class="title-status">
+                    Aguardamos sua avaliação
+                </h4>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    Para qualquer imprevisto ou problemas, nossos contatos estão abaixo para
+                    atende-lo da melhor maneira possível.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="divider"></div>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

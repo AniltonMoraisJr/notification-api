@@ -62,6 +62,9 @@ TR/xhtm11/DTD/xhtml1-transitional.dtd">
 		font-family: sans-serif;
 		color: #171a1b;
 	}
+	strong {
+	 font-weight: bold;
+	}
 </style>
 	<body>
 		<div class="wrapper">
@@ -79,9 +82,9 @@ TR/xhtm11/DTD/xhtml1-transitional.dtd">
 				<tr>
 					<td>
 						<p>
-							Olá <b th:text="${userName}">Neymar</b>, passamos aqui para informar que seu agendamento para a quadra com a
-							data de inicio <b th:text="${startDate}">22 de outubro de 2022</b> ás <b th:text="${startHour}">10:00</b> até <b th:text="${endDate}">22 de outubro de
-							2022</b> ás <b th:text="${endHour}">14:00</b> com o valor total de <b>R$</b><b th:text="${#numbers.formatDecimal(amount,0,'COMMA',2, 'POINT')}">0,00</b> foi concluído com
+							Olá <strong th:text="${userName}">Neymar</strong>, passamos aqui para informar que seu agendamento para a quadra com a
+							data de inicio <strong th:text="${startDate}">22 de outubro de 2022</strong> ás <strong th:text="${startHour}">10:00</strong> até <strong th:text="${endDate}">22 de outubro de
+							2022</strong> ás <strong th:text="${endHour}">14:00</strong> com o valor total de <strong>R$</strong><strong th:text="${#numbers.formatDecimal(amount,0,'COMMA',2, 'POINT')}">0,00</strong> foi concluído com
 							sucesso. Para concluirmos este agendamento precisamos aguardar a confirmação do seu pagamento, assim 
 							que recebermos a confirmação informamos você.
 						</p>

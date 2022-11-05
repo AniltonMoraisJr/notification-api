@@ -5,15 +5,12 @@ spring:
     name: Notification-Api
   datasource:
     pg:
-#      url: jdbc:postgresql://192.168.18.9:5431/bora_jogar
-      url: jdbc:postgresql://0.0.0.0:5432/bora_jogar
+      url: jdbc:postgresql://192.168.18.31:5431/bora_jogar
       username: postgres
-#      password: example
-      password: 1234
+      password: example
       driverClassName: org.postgresql.Driver
     mg:
-#      host: 192.168.18.9
-      host: 0.0.0.0
+      host: 192.168.18.31
       port: 27017
       database: bora-jogar
       username:
@@ -40,7 +37,9 @@ spring:
           time_zone: America/Sao_Paulo
           batch_size: 100
     hibernate:
-      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
       ddl-auto: validate
     show-sql: true
   jackson:
@@ -64,7 +63,7 @@ spring:
     protocol: smtp
     test-connection: false
   rabbitmq:
-    host: 192.168.18.9
+    host: 192.168.18.31
     port: 5672
     username: guest
     password: guest
